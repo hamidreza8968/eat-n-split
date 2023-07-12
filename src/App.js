@@ -1,3 +1,5 @@
+import {useState} from "react";
+
 const initialFriends = [
   {
     id: 118836,
@@ -20,22 +22,37 @@ const initialFriends = [
 ];
 
 function App() {
-  return (
-      <div className="app">
-        <div className="sidebar">
-          <FriendsList/>
-          <FormAddFriend/>
-          <Button>Add friend</Button>
+    const [showAddFriend, setShowAddFriend] = useState(false);
+    function handleShowAddFriend() {
+        setShowAddFriend((show) => !show);
+    }
+
+    const [friends , setFriends] = useState([]);
+    const [name , setName] = useState("");
+    const [image , setImage] = useState("");
+
+    function handleAddFriend(friend){
+        setFriends(friends => [...friends , friend]);
+        setShowAddFriend(false);
+    }
+
+    return (
+        <div className="app">
+            <div className="sidebar">
+                <FriendsList friends={friends}/>
+                {showAddFriend && <FormAddFriend friends={friends} onAddFriend={handleAddFriend} name={name} onSetName={setName} image={image} onSetImage={setImage}/>}
+                <Button onClick={handleShowAddFriend}>{showAddFriend ? "Close" : "Add friend"}</Button>
+            </div>
+            <FormSplitBill/>
         </div>
-          <FormSplitBill/>
-      </div>
-  );
+    );
 }
 
-function FriendsList() {
+function FriendsList({friends}) {
+
   return (
       <ul>
-        {initialFriends.map(friend => <Friend friend={friend} key={friend.id}/>)}
+        {friends.map(friend => <Friend friend={friend} key={friend.id}/>)}
       </ul>
   );
 }
@@ -53,14 +70,32 @@ function Friend({friend}) {
   );
 }
 
-function FormAddFriend() {
+function FormAddFriend({onAddFriend , name , onSetName, image , onSetImage}) {
+    function handleSubmit(e) {
+        e.preventDefault();
+
+        if(!name || !image) return;
+
+        const newFriend = {
+            name,
+            image,
+            balance:0,
+            id: crypto.randomUUID(),
+        };
+
+        onAddFriend(newFriend);
+
+       onSetName("");
+       onSetImage("");
+    }
+
   return (
-      <form className="form-add-friend" action="">
+      <form className="form-add-friend" action="" onSubmit={handleSubmit}>
         <label htmlFor="">👫 Friend name</label>
-        <input type="text"/>
+        <input value={name} onChange={(e) => onSetName(e.target.value)} type="text"/>
 
         <label htmlFor="">🌅 Image URL</label>
-        <input type="text"/>
+        <input value={image} onChange={(e) => onSetImage(e.target.value)} type="text"/>
 
         <Button>Add</Button>
       </form>
@@ -88,9 +123,9 @@ function FormSplitBill() {
   );
 }
 
-function Button({children}) {
+function Button({children , onClick}) {
   return (
-      <button className="button">{children}</button>
+      <button onClick={onClick} className="button">{children}</button>
   );
 }
 
