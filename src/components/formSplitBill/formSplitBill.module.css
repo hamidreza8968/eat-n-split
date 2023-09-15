@@ -1,0 +1,21 @@
+.row{
+    position: relative;
+    grid-column: 1/-1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.message{
+    position: absolute;
+    font-size: 11px;
+    color: red;
+    bottom: -18px;
+    right: 0;
+    white-space: nowrap;
+}
+.lastItem{
+    justify-self: end;
+}
+.name{
+    color: #ffa94d;
+}
