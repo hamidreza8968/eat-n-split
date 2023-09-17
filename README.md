@@ -1,6 +1,6 @@
 # BillShare Pro
 
-![BillShare Pro Logo](logo.png)
+BillShare Pro Logo
 
 BillShare Pro is the hassle-free way to split bills with friends. Whether you're dining out, traveling, or sharing expenses for any occasion, our app simplifies the process, making it easy for everyone to contribute and track expenses.
 
@@ -27,22 +27,5 @@ BillShare Pro is the hassle-free way to split bills with friends. Whether you're
 4. **Open in Your Browser**:
 Open your web browser and go to `http://localhost:3000` to start using BillShare Pro.
 
-## Contributing
-
-We welcome contributions from the community. If you have ideas for improvements or new features, please open an issue or submit a pull request.
-
-## Support
-
-If you encounter any issues or need assistance, please reach out to our support team at support@billsharepro.com.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-We would like to thank our contributors and the open-source community for their valuable input and support.
-
-Happy bill sharing!
 
 
