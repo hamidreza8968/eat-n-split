@@ -25,24 +25,26 @@ function FormSplitBill({selectedFriend, onSplitBill}) {
     }
     const handleBillValue = (e) => {
         if(isNumber(e.target.value)){
-            setBill(e.target.value)
+            setBill(e.target.value);
             message.billMessage && setMessage({...message, billMessage: ""})
 
         }else{
-            setMessage({...message, billMessage: "Please enter number"})
+            setMessage({...message, billMessage: "Please enter number"});
             setBill("")
         }
-    }
+    };
     const handleExpensesValue = (e) => {
         if(isNumber(e.target.value)){
-            message.expensesMessage && setMessage({...message, expensesMessage: ""})
+            message.expensesMessage && setMessage({...message, expensesMessage: ""});
             setUserExpense(Number(e.target.value) > bill ?
                 userExpense : Number(e.target.value))
         }else{
-            setMessage({...message, expensesMessage: "Please enter number"})
+            setMessage({...message, expensesMessage: "Please enter number"});
             setUserExpense("")
         }
-    }
+        if (Number(e.target.value) > bill)setMessage({...message, expensesMessage: "Your expense couldn't be more than Bill value!"});
+        if (!bill)setMessage({...message, expensesMessage: "Please fill the Bill value first!"});
+    };
 
     return (
         <form className="form-split-bill" onSubmit={handleSubmit} action="src/components">
